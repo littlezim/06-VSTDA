@@ -1,0 +1,77 @@
+<!doctype html>
+
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="utf-8">
+	<title>Very Simple To Do App</title>
+
+	<!--bower:css-->
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+	<!--endbower-->
+
+	<!--inject:css-->
+	<!--endinject-->
+</head>
+
+<body ng-controller="HomeController">
+	<div class = container>
+		<div class = row>
+			<div class = "col-xs-12 col-sm-5 well">
+				<h3>Add To Do Items</h3>
+				<div class = row>
+					<!-- Text input for user's to do list -->
+					<label for="textIn">Text:</label>
+					<input ng-model="text" class="form-control">
+				</div>
+				<div class = row>
+					<!-- Selector for the priority level of the task for the to do list -->
+					<div class="form-group">
+						<label for="priorities">Priority:</label>
+						<select ng-model="priority" class="form-control" id="priorities">
+							<!-- Values set for priority level -->
+							<option value = "1">High</option>
+							<option value = "2">Medium</option>
+							<option value = "3">Low</option>
+						</select>					
+					</div>
+				</div>
+				<div class = row>
+					<!-- Button for posting user inputs to the to do list -->
+					<button ng-click="addToDo()" id="buttonAdd" type="button" class="btn btn-primary">Add to Do</button>
+				</div>
+			</div>				
+			<div class = "col-xs-12 col-sm-6 col-sm-offset-1 well">
+				<div class = row>
+					<!-- Button to Sort by highest priority -->
+					<button ng-click="sort = 'priority' " type="button" class="btn btn-primary">Sort by highest priority</button>
+					<!-- Button to Sort by lowest priority  -->			
+					<button ng-click="sort = '-priority' " type="button" class="btn btn-primary">Sort by lowest priority</button>	
+					<!-- Button to Sort alphabetically -->
+					<button ng-click="sort = 'text' " type="button" class="btn btn-primary">Sort Alphabetically</button>
+				</div>
+				<div class = row>
+					<!-- Output user's input and create background color based on priority level -->
+					<div ng-repeat="toDo in toDos | orderBy : sort" ng-class = "{'bg-danger' : toDo.priority === 1 , 'bg-warning' : toDo.priority === 2 , 'bg-success' : toDo.priority === 3}">
+						{{toDo.text}}
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+	</div>
+
+	<!--bower:js-->
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+	<!--endbower-->
+
+
+	<!--inject:js-->
+	<script src="js/app.js"></script>
+	<script src="js/home.controller.js"></script>
+	<!--endinject-->
+</body>
+</html>

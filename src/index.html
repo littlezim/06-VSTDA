@@ -3,6 +3,7 @@
 <html lang="en" ng-app="app">
 <head>
 	<meta charset="utf-8">
+
 	<title>Very Simple To Do App</title>
 
 	<!--bower:css-->
@@ -14,16 +15,21 @@
 </head>
 
 <body ng-controller="HomeController">
-	<div class = container>
-		<div class = row>
+	<div class = "container">
+		<div class = "row">
+			
+			<!-- Container for inputs and button to post those inputs-->
 			<div class = "col-xs-12 col-sm-5 well">
+				
 				<h3>Add To Do Items</h3>
-				<div class = row>
+				
+				<div class = "row">
 					<!-- Text input for user's to do list -->
 					<label for="textIn">Text:</label>
 					<input ng-model="text" class="form-control">
 				</div>
-				<div class = row>
+				
+				<div class = "row">
 					<!-- Selector for the priority level of the task for the to do list -->
 					<div class="form-group">
 						<label for="priorities">Priority:</label>
@@ -35,13 +41,17 @@
 						</select>					
 					</div>
 				</div>
-				<div class = row>
+				
+				<div class = "row">
 					<!-- Button for posting user inputs to the to do list -->
 					<button ng-click="addToDo()" id="buttonAdd" type="button" class="btn btn-primary">Add to Do</button>
 				</div>
-			</div>				
+			</div>
+			
+
+			<!-- Container for sort buttons and where user's inputs will be posted -->
 			<div class = "col-xs-12 col-sm-6 col-sm-offset-1 well">
-				<div class = row>
+				<div class = "row">
 					<!-- Button to Sort by highest priority -->
 					<button ng-click="sort = 'priority' " type="button" class="btn btn-primary">Sort by highest priority</button>
 					<!-- Button to Sort by lowest priority  -->			
@@ -49,10 +59,12 @@
 					<!-- Button to Sort alphabetically -->
 					<button ng-click="sort = 'text' " type="button" class="btn btn-primary">Sort Alphabetically</button>
 				</div>
-				<div class = row>
+
+				<div class = "row">
 					<!-- Output user's input and create background color based on priority level -->
 					<div ng-repeat="toDo in toDos | orderBy : sort" ng-class = "{'bg-danger' : toDo.priority === 1 , 'bg-warning' : toDo.priority === 2 , 'bg-success' : toDo.priority === 3}">
 						{{toDo.text}}
+					<button ng-click="deleteDo(toDo)" id="buttonDelete" type="button" class="btn btn-danger">Delete</button>
 					</div>
 				</div>
 			</div>
